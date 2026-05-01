@@ -60,5 +60,5 @@ p {
 .list-item:hover {
   transform: translateY(-10px);
   transition: all 0.7s ease;
-  animation: step-end 0.7s ease;
+  box-shadow: 0 0 20px rgb(129, 129, 255);
 }
