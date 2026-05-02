@@ -7,9 +7,10 @@ request.addEventListener('readystatechange', () => {
     data.forEach(({ title, id, completed}) => {
       elList.innerHTML += `
       <div class="list-item">
-      <h1 class="title">title : ${title.slice(0, 20)}...</h1>
+      <h4 class="title">title : ${title.slice(0, 20)}...</h4>
       <p>id : ${id}</p>
       <p>completed : ${completed}</p>
+      <button class="btn">Buy</button>
       </div>
       `
     })

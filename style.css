@@ -23,11 +23,11 @@ body {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 p {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .list {
@@ -45,15 +45,15 @@ p {
   display: flex;
   align-items: start;
   justify-content: center;
-  padding: 10px;
   flex-direction: column;
+  padding: 10px;
   background: grey;
   box-shadow: 0 0 10px white;
   color: white;
   border-radius: 10px;
   margin: 20px;
   width: 250px;
-  height: 300px;
+  height: 320px;
   transition: all 0.7s ease;
 }
 
@@ -61,4 +61,22 @@ p {
   transform: translateY(-10px);
   transition: all 0.7s ease;
   box-shadow: 0 0 20px rgb(129, 129, 255);
+}
+
+.btn {
+  padding: 10px 30px;
+  background: rgb(129, 129, 255);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgb(129, 129, 255);
+}
+
+.btn:hover {
+  background: white;
+  color: rgba(129, 129, 255);
+  box-shadow: 0 0 10px white;
 }
