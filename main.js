@@ -1,43 +1,27 @@
 const request = new XMLHttpRequest();
 const elList = document.querySelector('.list');
+const elLoading = document.querySelector('.loader');
 
 request.addEventListener('readystatechange', () => {
-  if (request.readyState === 4) {
+  if (request.readyState === 4 && request.status === 200) {
     const data = JSON.parse(request.responseText);
-    data.forEach(({ title, id, completed}) => {
-      elList.innerHTML += `
-      <div class="list-item">
-      <h4 class="title">title : ${title.slice(0, 20)}...</h4>
-      <p>id : ${id}</p>
-      <p>completed : ${completed}</p>
-      <button class="btn">Buy</button>
-      </div>
-      `
-    })
-  }
+    showData(data);
+    elLoading.innerHTML = '';
+  };
 });
 
 request.open('GET', 'https://jsonplaceholder.typicode.com/todos/');
 request.send();
 
-
-// const request = new XMLHttpRequest();
-// const elList = document.querySelector('.list');
-
-// request.addEventListener('readystatechange', () => {
-//   if (request.readyState === 4) {
-//     const data = JSON.parse(request.responseText);
-//     data.forEach(({ title, id, completed }) => {
-//       elList.innerHTML += `
-//       <div class="list-item">
-//       <h1 class="title">title : ${title.slice(0, 20)}...</h1>
-//       <p>id : ${id}</p>
-//       <p>completed : ${completed}</p>
-//       </div>
-//       `
-//     });
-//   }
-// });
-
-// request.open('GET', 'https://jsonplaceholder.typicode.com/todos/');
-// request.send();
+function showData(data) {
+  data.forEach((element) => {
+    elList.innerHTML += `
+      <div class="list-item">
+      <h4 class="title">title : ${element.title.slice(0, 20)}...</h4>
+      <p>id : ${element.id}</p>
+      <p>completed : ${element.completed}</p>
+      <button class="btn">Buy</button>
+      </div>
+    `
+  })
+};
