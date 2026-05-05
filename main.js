@@ -1,27 +1,42 @@
-const request = new XMLHttpRequest();
-const elList = document.querySelector('.list');
-const elLoading = document.querySelector('.loader');
+let allData = [];
+let visibleCount = 0;
+const STEP = 6;
 
-request.addEventListener('readystatechange', () => {
+const loadMoreBtn = document.querySelector('#load-more');
+const request = new XMLHttpRequest();
+const list = document.querySelector('.list');
+const loader = document.querySelector('.loader');
+request.addEventListener('readystatechange' , () => {
   if (request.readyState === 4 && request.status === 200) {
-    const data = JSON.parse(request.responseText);
-    showData(data);
-    elLoading.innerHTML = '';
-  };
+    allData = JSON.parse(request.responseText);
+    loader.style.display = 'none';           
+    loadMoreBtn.style.display = 'block';       
+    showData();                               
+  }
 });
 
-request.open('GET', 'https://jsonplaceholder.typicode.com/todos/');
-request.send();
+function showData() {
+  const batch = allData.slice(visibleCount, visibleCount + STEP);
 
-function showData(data) {
-  data.forEach((element) => {
-    elList.innerHTML += `
-      <div class="list-item">
+  batch.forEach(element => {
+    list.innerHTML += `
+    <div class="list-item">
       <h4 class="title">title : ${element.title.slice(0, 20)}...</h4>
       <p>id : ${element.id}</p>
       <p>completed : ${element.completed}</p>
       <button class="btn">Buy</button>
-      </div>
-    `
-  })
-};
+    </div>
+    `;
+  });
+
+  visibleCount += STEP;
+
+  if (visibleCount >= allData.length) {
+    loadMoreBtn.style.display = 'none';
+  }
+}
+
+loadMoreBtn.addEventListener('click', showData);
+
+request.open('GET' , 'https://jsonplaceholder.typicode.com/todos/');
+request.send();
